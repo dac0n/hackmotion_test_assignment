@@ -32,17 +32,61 @@ class _HomeScreenState extends State<HomeScreen> {
     if (index >= 0 && index < _swings.length) {
       Navigator.push(
         context,
-        MaterialPageRoute(
-          builder: (context) => InspectionScreen(
-            swing: _swings[index],
-            index: index,
-            totalSwings: _swings.length,
-            onDelete: _deleteSwing,
-            onNavigate: _navigateToSwing,
-          ),
-        ),
+        _createRoute(index, AnimationDirection.defaultDirection),
       );
     }
+  }
+
+  Route _createRoute(int index, AnimationDirection direction) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => InspectionScreen(
+        swing: _swings[index],
+        index: index,
+        totalSwings: _swings.length,
+        onDelete: _deleteSwing,
+        onNavigate: (newIndex) {
+          if (newIndex < index) {
+            Navigator.pushReplacement(
+              context,
+              _createRoute(newIndex, AnimationDirection.leftToRight),
+            );
+          } else {
+            Navigator.pushReplacement(
+              context,
+              _createRoute(newIndex, AnimationDirection.rightToLeft),
+            );
+          }
+        },
+      ),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const curve = Curves.easeInOut;
+        Offset beginOffset;
+
+        switch (direction) {
+          case AnimationDirection.leftToRight:
+            beginOffset = const Offset(-1.0, 0.0);
+            break;
+          case AnimationDirection.rightToLeft:
+            beginOffset = const Offset(1.0, 0.0);
+            break;
+          case AnimationDirection.defaultDirection:
+          default:
+            beginOffset = Offset.zero;
+            break;
+        }
+
+        final tween = Tween(
+          begin: beginOffset,
+          end: Offset.zero,
+        ).chain(CurveTween(curve: curve));
+        final offsetAnimation = animation.drive(tween);
+
+        return SlideTransition(
+          position: offsetAnimation,
+          child: child,
+        );
+      },
+    );
   }
 
   @override
@@ -78,4 +122,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+}
+
+enum AnimationDirection {
+  leftToRight,
+  rightToLeft,
+  defaultDirection,
 }
