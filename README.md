@@ -4,11 +4,12 @@ My Golf App is a Flutter-based application for inspecting recorded golf swings. 
 It features a Home Screen listing all swings and an Inspection Screen for detailed metrics.
 
 Project structure:
-• lib/
-• models/: Data models (swing_model.dart).
-• repositories/: Data fetching (swing_repository.dart).
-• screens/: Main screens (home_screen.dart, inspection_screen.dart).
-• widgets/: Reusable widgets (app_bar_widget.dart, header_widget.dart, chart_container.dart, navigation_button.dart, swing_chart.dart).
+
+- lib/
+- models/: Data models (swing_model.dart).
+- repositories/: Data fetching (swing_repository.dart).
+- screens/: Main screens (home_screen.dart, inspection_screen.dart).
+- widgets/: Reusable widgets (app_bar_widget.dart, header_widget.dart, chart_container.dart, navigation_button.dart, swing_chart.dart).
 
 ## Installation
 
