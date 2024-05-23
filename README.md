@@ -15,11 +15,11 @@ Project structure:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/my_golf_app.git
+   git clone https://github.com/dac0n/hackmotion_test_assignment
    ```
 2. Navigate to the project directory:
    ```bash
-   cd my_golf_app
+   cd hackmotion_test_assignment
    ```
 3. Install dependencies:
    ```bash

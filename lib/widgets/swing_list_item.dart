@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_golf_app/models/swing_model.dart';
+import 'package:hackmotion_test_assignment/models/swing_model.dart';
 
 class SwingItem extends StatelessWidget {
   final int index;

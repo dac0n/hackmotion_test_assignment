@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_golf_app/models/swing_model.dart';
-import 'package:my_golf_app/widgets/app_bar.dart';
-import 'package:my_golf_app/widgets/chart_container.dart';
-import 'package:my_golf_app/widgets/header.dart';
-import 'package:my_golf_app/widgets/navigation_button.dart';
+import 'package:hackmotion_test_assignment/models/swing_model.dart';
+import 'package:hackmotion_test_assignment/widgets/app_bar.dart';
+import 'package:hackmotion_test_assignment/widgets/chart_container.dart';
+import 'package:hackmotion_test_assignment/widgets/header.dart';
+import 'package:hackmotion_test_assignment/widgets/navigation_button.dart';
 
 class InspectionScreen extends StatefulWidget {
   final Swing swing;

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:my_golf_app/models/swing_model.dart';
+import 'package:hackmotion_test_assignment/models/swing_model.dart';
 
 class SwingRepository {
   Future<List<Swing>> getSwings() async {
