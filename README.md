@@ -1,6 +1,6 @@
 # hackmotion_test_assignment
 
-My Golf App is a Flutter-based application for inspecting recorded golf swings. I've written it as a test assignment to Hackmotion.
+A Flutter-based application for inspecting recorded golf swings. I've written it as a test assignment to Hackmotion.
 It features a Home Screen listing all swings and an Inspection Screen for detailed metrics.
 
 Project structure:
