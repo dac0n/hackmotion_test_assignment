@@ -1,16 +1,30 @@
 # hackmotion_test_assignment
 
-A new Flutter project.
+My Golf App is a Flutter-based application for inspecting recorded golf swings. I've written it as a test assignment to Hackmotion.
+It features a Home Screen listing all swings and an Inspection Screen for detailed metrics.
 
-## Getting Started
+Project structure:
+• lib/
+• models/: Data models (swing_model.dart).
+• repositories/: Data fetching (swing_repository.dart).
+• screens/: Main screens (home_screen.dart, inspection_screen.dart).
+• widgets/: Reusable widgets (app_bar_widget.dart, header_widget.dart, chart_container.dart, navigation_button.dart, swing_chart.dart).
 
-This project is a starting point for a Flutter application.
+## Installation
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/my_golf_app.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd my_golf_app
+   ```
+3. Install dependencies:
+   ```bash
+   flutter pub get
+   ```
+4. Run the application:
+   ```bash
+   flutter run
+   ```

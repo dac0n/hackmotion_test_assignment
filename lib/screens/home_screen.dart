@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/swing_model.dart';
-import '../repositories/swing_repository.dart';
+import '../utils/swing_processor.dart';
 import 'inspection_screen.dart';
 
 class HomeScreen extends StatefulWidget {

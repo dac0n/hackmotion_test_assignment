@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
-import 'repositories/swing_repository.dart';
+import 'utils/swing_processor.dart';
 
 void main() {
   runApp(MyApp());
