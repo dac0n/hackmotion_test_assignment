@@ -7,7 +7,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final SwingRepository swingRepository = SwingRepository();
+  final SwingProcessor swingProcessor = SwingProcessor();
 
   MyApp({Key? key}) : super(key: key);
 
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(swingRepository: swingRepository),
+      home: HomeScreen(swingProcessor: swingProcessor),
     );
   }
 }

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:hackmotion_test_assignment/models/swing_model.dart';
 
-class SwingRepository {
+class SwingProcessor {
   Future<List<Swing>> getSwings() async {
     List<Swing> swings = [];
     try {

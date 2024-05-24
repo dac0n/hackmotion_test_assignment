@@ -4,9 +4,9 @@ import '../utils/swing_processor.dart';
 import 'inspection_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  final SwingRepository swingRepository;
+  final SwingProcessor swingProcessor;
 
-  const HomeScreen({Key? key, required this.swingRepository}) : super(key: key);
+  const HomeScreen({Key? key, required this.swingProcessor}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _futureSwings = widget.swingRepository.getSwings();
+    _futureSwings = widget.swingProcessor.getSwings();
   }
 
   void _deleteSwing(int index) {
