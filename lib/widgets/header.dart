@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class HeaderWidget extends StatelessWidget {
   final int index;
+  final String name;
   final int totalSwings;
   final Function(int) onDelete;
   final Function(int) onNavigate;
@@ -9,6 +10,7 @@ class HeaderWidget extends StatelessWidget {
   const HeaderWidget({
     Key? key,
     required this.index,
+    required this.name,
     required this.totalSwings,
     required this.onDelete,
     required this.onNavigate,
@@ -20,7 +22,7 @@ class HeaderWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Swing ${index + 1}',
+          'Swing ${name}',
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         IconButton(

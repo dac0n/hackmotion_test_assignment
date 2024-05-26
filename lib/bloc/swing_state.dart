@@ -4,6 +4,8 @@ abstract class SwingState {}
 
 class SwingInitial extends SwingState {}
 
+class SwingLoading extends SwingState {}
+
 class SwingsLoaded extends SwingState {
   final List<Swing> swings;
 

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import '../models/swing_model.dart';
-import '../utils/swing_processor.dart';
-import 'inspection_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hackmotion_test_assignment/screens/inspection_screen.dart';
+import 'package:hackmotion_test_assignment/bloc/swing_bloc.dart';
+import 'package:hackmotion_test_assignment/bloc/swing_state.dart';
+import 'package:hackmotion_test_assignment/utils/swing_processor.dart';
+import 'package:path/path.dart' as p;
 
 class HomeScreen extends StatefulWidget {
   final SwingProcessor swingProcessor;
@@ -9,27 +12,28 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key, required this.swingProcessor}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  late Future<List<Swing>> _futureSwings;
-  List<Swing> _swings = [];
+class HomeScreenState extends State<HomeScreen> {
+  late SwingBloc _swingBloc;
 
   @override
   void initState() {
     super.initState();
-    _futureSwings = widget.swingProcessor.getSwings();
+    _swingBloc = SwingBloc(swingProcessor: widget.swingProcessor);
+    _swingBloc.loadSwings();
   }
 
   void _deleteSwing(int index) {
     setState(() {
-      _swings.removeAt(index);
+      (_swingBloc.state as SwingsLoaded).swings.removeAt(index);
     });
   }
 
   void _navigateToSwing(int index) {
-    if (index >= 0 && index < _swings.length) {
+    final swings = (_swingBloc.state as SwingsLoaded).swings;
+    if (index >= 0 && index < swings.length) {
       Navigator.push(
         context,
         _createRoute(index, AnimationDirection.defaultDirection),
@@ -38,11 +42,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Route _createRoute(int index, AnimationDirection direction) {
+    final swings = (_swingBloc.state as SwingsLoaded).swings;
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => InspectionScreen(
-        swing: _swings[index],
+        swing: swings[index],
         index: index,
-        totalSwings: _swings.length,
+        totalSwings: swings.length,
         onDelete: _deleteSwing,
         onNavigate: (newIndex) {
           if (newIndex < index) {
@@ -95,28 +100,31 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      body: FutureBuilder<List<Swing>>(
-        future: _futureSwings,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+      body: BlocBuilder<SwingBloc, SwingState>(
+        bloc: _swingBloc,
+        builder: (context, state) {
+          if (state is SwingLoading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No swings available'));
+          } else if (state is SwingsError) {
+            return const Center(child: Text('Failed to load swings.'));
+          } else if (state is SwingsLoaded) {
+            final swings = state.swings;
+            if (swings.isEmpty) {
+              return const Center(
+                  child: Text('No swings available. Golf time, maybe?'));
+            } else {
+              return ListView.builder(
+                itemCount: swings.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text('Swing ${p.basename(swings[index].filePath)}'),
+                    onTap: () => _navigateToSwing(index),
+                  );
+                },
+              );
+            }
           } else {
-            _swings = snapshot.data!;
-            return ListView.builder(
-              itemCount: _swings.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text('Swing ${index + 1}'),
-                  onTap: () {
-                    _navigateToSwing(index);
-                  },
-                );
-              },
-            );
+            return const Center(child: Text('Unknown state.'));
           }
         },
       ),

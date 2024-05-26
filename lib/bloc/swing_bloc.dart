@@ -8,9 +8,18 @@ class SwingBloc extends Cubit<SwingState> {
   SwingBloc({required this.swingProcessor}) : super(SwingInitial());
 
   void loadSwings() async {
+    emit(SwingLoading());
     try {
-      final swings = await swingProcessor.getSwings();
-      emit(SwingsLoaded(swings: swings));
+      await for (final swing
+          in swingProcessor.getSwings(includeFilePath: true)) {
+        final currentState = state;
+        if (currentState is SwingsLoaded) {
+          emit(
+              SwingsLoaded(swings: List.from(currentState.swings)..add(swing)));
+        } else {
+          emit(SwingsLoaded(swings: [swing]));
+        }
+      }
     } catch (_) {
       emit(SwingsError());
     }

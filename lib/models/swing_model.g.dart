@@ -10,11 +10,13 @@ Swing _$SwingFromJson(Map<String, dynamic> json) => Swing(
       captureType: json['captureType'] as String,
       parameters:
           Parameters.fromJson(json['parameters'] as Map<String, dynamic>),
+      filePath: json['filePath'] as String? ?? '',
     );
 
 Map<String, dynamic> _$SwingToJson(Swing instance) => <String, dynamic>{
       'captureType': instance.captureType,
       'parameters': instance.parameters,
+      'filePath': instance.filePath,
     };
 
 Parameters _$ParametersFromJson(Map<String, dynamic> json) => Parameters(

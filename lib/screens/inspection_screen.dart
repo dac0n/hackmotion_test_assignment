@@ -4,6 +4,7 @@ import 'package:hackmotion_test_assignment/widgets/app_bar.dart';
 import 'package:hackmotion_test_assignment/widgets/chart_container.dart';
 import 'package:hackmotion_test_assignment/widgets/header.dart';
 import 'package:hackmotion_test_assignment/widgets/navigation_button.dart';
+import 'package:path/path.dart' as p;
 
 class InspectionScreen extends StatefulWidget {
   final Swing swing;
@@ -22,10 +23,10 @@ class InspectionScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _InspectionScreenState createState() => _InspectionScreenState();
+  InspectionScreenState createState() => InspectionScreenState();
 }
 
-class _InspectionScreenState extends State<InspectionScreen>
+class InspectionScreenState extends State<InspectionScreen>
     with SingleTickerProviderStateMixin {
   bool _isAnimating = false;
   late AnimationController _animationController;
@@ -75,6 +76,7 @@ class _InspectionScreenState extends State<InspectionScreen>
           children: [
             HeaderWidget(
               index: widget.index,
+              name: p.basename(widget.swing.filePath),
               totalSwings: widget.totalSwings,
               onDelete: widget.onDelete,
               onNavigate: widget.onNavigate,

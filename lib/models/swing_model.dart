@@ -6,8 +6,11 @@ part 'swing_model.g.dart';
 class Swing {
   final String captureType;
   final Parameters parameters;
-
-  Swing({required this.captureType, required this.parameters});
+  String filePath; // can be set after initialization
+  Swing(
+      {required this.captureType,
+      required this.parameters,
+      this.filePath = ''});
 
   factory Swing.fromJson(Map<String, dynamic> json) => _$SwingFromJson(json);
   Map<String, dynamic> toJson() => _$SwingToJson(this);
