@@ -22,7 +22,7 @@ class HeaderWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Swing ${name}',
+          'Swing $name',
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         IconButton(
