@@ -29,8 +29,8 @@ class SwingChart extends StatelessWidget {
 
   List<double> _getAllValues(Swing swing) {
     return [
-      ...swing.parameters.HFA_crWrFlexEx.values,
-      ...swing.parameters.HFA_crWrRadUln.values
+      ...swing.parameters.flexionExtension,
+      ...swing.parameters.ulnarRadial
     ];
   }
 
@@ -93,14 +93,14 @@ class SwingChart extends StatelessWidget {
   List<LineChartBarData> _buildLineBarsData() {
     return [
       LineChartBarData(
-        spots: _convertToSpots(swing.parameters.HFA_crWrFlexEx.values),
+        spots: _convertToSpots(swing.parameters.flexionExtension),
         isCurved: true,
         color: Colors.blue,
         barWidth: 2,
         dotData: const FlDotData(show: false),
       ),
       LineChartBarData(
-        spots: _convertToSpots(swing.parameters.HFA_crWrRadUln.values),
+        spots: _convertToSpots(swing.parameters.ulnarRadial),
         isCurved: true,
         color: Colors.orange,
         barWidth: 2,
