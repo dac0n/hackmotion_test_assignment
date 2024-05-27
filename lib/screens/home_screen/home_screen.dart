@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hackmotion_test_assignment/screens/inspection_screen.dart';
+import 'package:hackmotion_test_assignment/screens/inspection_screen/inspection_screen.dart';
 import 'package:hackmotion_test_assignment/bloc/swing_bloc.dart';
 import 'package:hackmotion_test_assignment/bloc/swing_state.dart';
 import 'package:hackmotion_test_assignment/utils/swing_processor.dart';

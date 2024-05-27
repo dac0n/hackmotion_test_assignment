@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-AppBar buildAppBar(BuildContext context) {
+AppBar buildInspectionScreenAppBar(BuildContext context) {
   return AppBar(
     title: const Text('Inspection'),
     leading: IconButton(

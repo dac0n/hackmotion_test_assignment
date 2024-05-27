@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hackmotion_test_assignment/models/swing_model.dart';
-import 'package:hackmotion_test_assignment/widgets/app_bar.dart';
+import 'package:hackmotion_test_assignment/screens/inspection_screen/app_bar.dart';
 import 'package:hackmotion_test_assignment/widgets/chart_container.dart';
 import 'package:hackmotion_test_assignment/widgets/header.dart';
 import 'package:hackmotion_test_assignment/widgets/navigation_button.dart';
@@ -66,7 +66,7 @@ class InspectionScreenState extends State<InspectionScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(context),
+      appBar: buildInspectionScreenAppBar(context),
       body: Padding(
         padding: const EdgeInsets.symmetric(
             horizontal: 15.0), // Horizontal margin for the entire page
@@ -90,18 +90,14 @@ class InspectionScreenState extends State<InspectionScreen>
                   onPressed: widget.index > 0 && !_isAnimating
                       ? () => _navigate(widget.index - 1)
                       : null,
-                  label: 'Previous',
-                  icon: Icons.arrow_left,
-                  isPrevious: true,
+                  direction: Directions.previous,
                 ),
                 NavigationButton(
                   onPressed:
                       widget.index < widget.totalSwings - 1 && !_isAnimating
                           ? () => _navigate(widget.index + 1)
                           : null,
-                  label: 'Next',
-                  icon: Icons.arrow_right,
-                  isPrevious: false,
+                  direction: Directions.next,
                 ),
               ],
             ),
