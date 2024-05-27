@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hackmotion_test_assignment/screens/inspection_screen/inspection_screen.dart';
-import 'package:hackmotion_test_assignment/bloc/swing_bloc.dart';
-import 'package:hackmotion_test_assignment/bloc/swing_state.dart';
+import 'package:hackmotion_test_assignment/cubits/swing_cubit.dart';
+import 'package:hackmotion_test_assignment/cubits/swing_state.dart';
 import 'package:hackmotion_test_assignment/utils/swing_processor.dart';
 import 'package:path/path.dart' as p;
 
@@ -16,23 +16,25 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  late SwingBloc _swingBloc;
+  late SwingCubit _swingCubit;
 
   @override
   void initState() {
     super.initState();
-    _swingBloc = SwingBloc(swingProcessor: widget.swingProcessor);
-    _swingBloc.loadSwings();
+    _swingCubit = SwingCubit(swingProcessor: widget.swingProcessor);
+    _swingCubit.loadSwings();
   }
 
   void _deleteSwing(int index) {
+    final currentSwings = (_swingCubit.state as SwingsLoaded).swings;
+
     setState(() {
-      (_swingBloc.state as SwingsLoaded).swings.removeAt(index);
+      currentSwings.removeAt(index);
     });
   }
 
   void _navigateToSwing(int index) {
-    final swings = (_swingBloc.state as SwingsLoaded).swings;
+    final swings = (_swingCubit.state as SwingsLoaded).swings;
     if (index >= 0 && index < swings.length) {
       Navigator.push(
         context,
@@ -42,7 +44,7 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   Route _createRoute(int index, AnimationDirection direction) {
-    final swings = (_swingBloc.state as SwingsLoaded).swings;
+    final swings = (_swingCubit.state as SwingsLoaded).swings;
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => InspectionScreen(
         swing: swings[index],
@@ -100,8 +102,8 @@ class HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      body: BlocBuilder<SwingBloc, SwingState>(
-        bloc: _swingBloc,
+      body: BlocBuilder<SwingCubit, SwingState>(
+        bloc: _swingCubit,
         builder: (context, state) {
           if (state is SwingLoading) {
             return const Center(child: CircularProgressIndicator());

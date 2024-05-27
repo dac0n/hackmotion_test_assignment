@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hackmotion_test_assignment/bloc/swing_state.dart';
+import 'package:hackmotion_test_assignment/cubits/swing_state.dart';
 import 'package:hackmotion_test_assignment/utils/swing_processor.dart';
 
-class SwingBloc extends Cubit<SwingState> {
+class SwingCubit extends Cubit<SwingState> {
   final SwingProcessor swingProcessor;
 
-  SwingBloc({required this.swingProcessor}) : super(SwingInitial());
+  SwingCubit({required this.swingProcessor}) : super(SwingInitial());
 
   void loadSwings() async {
     emit(SwingLoading());
@@ -20,7 +20,7 @@ class SwingBloc extends Cubit<SwingState> {
           emit(SwingsLoaded(swings: [swing]));
         }
       }
-    } catch (_) {
+    } catch (e) {
       emit(SwingsError());
     }
   }
